@@ -9,7 +9,7 @@ var app = express();
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
 console.log(file)
-    callback(null, './public');
+    callback(null, './¡/mnt/nas');
   },
   filename: function (req, file, callback) {
     callback(null, file.originalname);
@@ -18,7 +18,7 @@ console.log(file)
 var storageC = multer.diskStorage({
   destination: function (req, file, callback) {
 console.log(file)
-    callback(null, './public/covers');
+    callback(null, './mnt/nas/covers');
   },
   filename: function (req, file, callback) {
     callback(null, file.originalname);
@@ -35,6 +35,13 @@ app.get('/',function(req,res){
 
 app.use(express.static('public'));
 app.use('/public', express.static('public'));
+
+app.get('/media/:nombreTrack',function(req,res){
+      var nombre = req.params.nombreTrack;
+	console.log('/mnt/nas/'+nombre);
+	res.sendFile('/mnt/nas/'+nombre);
+});
+
 
 app.post('/api/photo',function(req,res){
   console.log("alguienLlama");
@@ -115,7 +122,7 @@ app.delete('/delete/:trackName',function(req,res){
 	console.log(req.params.trackName);
 name = req.params.trackName;
 
-fs.unlink('./public/'+ name,function (err){
+fs.unlink('./mnt/nas/'+ name,function (err){
   if (err) throw err;
   console.log('successfully deleted /tmp/hello');
 res.end("File is deleted");
