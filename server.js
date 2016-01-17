@@ -9,7 +9,7 @@ var app = express();
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
 console.log(file)
-    callback(null, './¡/mnt/nas');
+    callback(null, './mnt/nas');
   },
   filename: function (req, file, callback) {
     callback(null, file.originalname);
