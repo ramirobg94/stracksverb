@@ -8,7 +8,7 @@ var methodOverride = require('method-override');
 var app = express();
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
-console.log(file)
+//console.log(file)
     callback(null, '/mnt/nas');
   },
   filename: function (req, file, callback) {
@@ -17,7 +17,7 @@ console.log(file)
 });
 var storageC = multer.diskStorage({
   destination: function (req, file, callback) {
-console.log(file)
+//console.log(file)
     callback(null, '/mnt/nas/covers');
   },
   filename: function (req, file, callback) {
@@ -43,7 +43,7 @@ app.get('/media/:nombreTrack',function(req,res){
 });
 app.get('/media/covers/:nombreTrack',function(req,res){
       var nombre = req.params.nombreTrack;
-	console.log('/mnt/nas/covers/'+nombre);
+	console.log('cover : /mnt/nas/covers/'+nombre);
 	res.sendFile('/mnt/nas/covers/'+nombre);
 });
 
