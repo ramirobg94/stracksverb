@@ -9,7 +9,7 @@ var app = express();
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
 console.log(file)
-    callback(null, './mnt/nas');
+    callback(null, '/mnt/nas');
   },
   filename: function (req, file, callback) {
     callback(null, file.originalname);
@@ -18,7 +18,7 @@ console.log(file)
 var storageC = multer.diskStorage({
   destination: function (req, file, callback) {
 console.log(file)
-    callback(null, './mnt/nas/covers');
+    callback(null, '/mnt/nas/covers');
   },
   filename: function (req, file, callback) {
     callback(null, file.originalname);
@@ -122,7 +122,7 @@ app.delete('/delete/:trackName',function(req,res){
 	console.log(req.params.trackName);
 name = req.params.trackName;
 
-fs.unlink('./mnt/nas/'+ name,function (err){
+fs.unlink('/mnt/nas/'+ name,function (err){
   if (err) throw err;
   console.log('successfully deleted /tmp/hello');
 res.end("File is deleted");
