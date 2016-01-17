@@ -41,6 +41,11 @@ app.get('/media/:nombreTrack',function(req,res){
 	console.log('/mnt/nas/'+nombre);
 	res.sendFile('/mnt/nas/'+nombre);
 });
+app.get('/media/covers/:nombreTrack',function(req,res){
+      var nombre = req.params.nombreTrack;
+	console.log('/mnt/nas/covers/'+nombre);
+	res.sendFile('/mnt/nas/covers/'+nombre);
+});
 
 
 app.post('/api/photo',function(req,res){
