@@ -117,9 +117,7 @@ app.delete('/delete/:trackName',function(req,res){
   name = req.params.trackName;
   nameFile = name.slice(0, -4)+'.png';
 
-  if(!fs.existsSync('/mnt/nas'+ name)) {
-    console.log("Track not found");
-  }else{
+
     fs.unlink('/mnt/nas/'+ name,function (err){
       if (err) throw err;
 
@@ -134,7 +132,7 @@ app.delete('/delete/:trackName',function(req,res){
         });
       }
     });
-  }
+  
 });
 
 app.listen(3000,function(){
