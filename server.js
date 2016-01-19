@@ -119,11 +119,16 @@ app.delete('/delete/:trackName',function(req,res){
 
   fs.unlink('/mnt/nas/'+ name,function (err){
     if (err) throw err;
+
+    if(!fs.existsSync('/mnt/nas/covers/'+ nameFile)) {
+  console.log("Cover not found");
+}else{
     fs.unlink('/mnt/nas/covers/'+ nameFile,function (err){
       if (err) throw err;
       console.log('successfully deleted track and cover');
       res.end("File is deleted");
     });
+  }
   });
 
 });
