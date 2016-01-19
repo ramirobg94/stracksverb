@@ -118,7 +118,7 @@ app.delete('/delete/:trackName',function(req,res){
       if (err) throw err;
 
       if(!fs.existsSync('/mnt/nas/covers/'+ nameFile)) {
-        console.log("Cover not found");
+        console.log("Track is deleted but no cover, it is ok.");
         res.end("Track is deleted but no cover, it is ok.");
       }else{
         fs.unlink('/mnt/nas/covers/'+ nameFile,function (err){
