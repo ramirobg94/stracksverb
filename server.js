@@ -117,20 +117,24 @@ app.delete('/delete/:trackName',function(req,res){
   name = req.params.trackName;
   nameFile = name.slice(0, -4)+'.png';
 
-  fs.unlink('/mnt/nas/'+ name,function (err){
-    if (err) throw err;
-
-    if(!fs.existsSync('/mnt/nas/covers/'+ nameFile)) {
-  console.log("Cover not found");
-}else{
-    fs.unlink('/mnt/nas/covers/'+ nameFile,function (err){
+  if(!fs.existsSync('/mnt/nas'+ name)) {
+    console.log("Track not found");
+  }else{
+    fs.unlink('/mnt/nas/'+ name,function (err){
       if (err) throw err;
-      console.log('successfully deleted track and cover');
-      res.end("File is deleted");
+
+      if(!fs.existsSync('/mnt/nas/covers/'+ nameFile)) {
+        console.log("Cover not found");
+        res.end("Track is deleted but no cover, it is ok.");
+      }else{
+        fs.unlink('/mnt/nas/covers/'+ nameFile,function (err){
+          if (err) throw err;
+          console.log('successfully deleted track and cover');
+          res.end("Track and cover is deleted");
+        });
+      }
     });
   }
-  });
-
 });
 
 app.listen(3000,function(){
