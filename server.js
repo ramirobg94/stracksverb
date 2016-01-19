@@ -48,7 +48,7 @@ app.get('/media/covers/:nombreTrack',function(req,res){
 
 
 app.post('/api/track',function(req,res){
-  console.log("alguienLlama");
+  console.log("sube track");
   var request = req;
 
   if (request.method == 'POST') {
@@ -61,20 +61,13 @@ app.post('/api/track',function(req,res){
   });
 
   request.on('end', function () {
-    console.log(body);
-    console.log(body.fieldname);
-    console.log("fielName0");
+    //console.log(body);
+    //console.log(body.fieldname);
+    //console.log("fielName0");
     var post = qs.parse(body);
-    console.log(post.file);
-  // var postData = req.body;
-          //var writeStream = fs.createWriteStream(fileName);
-      /*    if(postData)
-              console.log(postData);
-          else{   
-              console.log("failed miserably");
-              console.log(postData);
-            }*/
-          });
+    //console.log(post.file);
+
+  });
 }
   //console.log(req);
   //console.log("alguienLlama2");
@@ -88,7 +81,7 @@ app.post('/api/track',function(req,res){
 });
 
 app.post('/api/photoCover',function(req,res){
-  console.log("alguienLlamaCover");
+  console.log("sube cover");
   var request = req;
   if (request.method == 'POST') {
     var body = '';
@@ -96,11 +89,11 @@ app.post('/api/photoCover',function(req,res){
       body += data;
     });
     request.on('end', function () {
-      console.log(body);
-      console.log(body.fieldname);
-      console.log("fielName0");
+     // console.log(body);
+      //console.log(body.fieldname);
+      //console.log("fielName0");
       var post = qs.parse(body);
-      console.log(post.file);
+      //console.log(post.file);
     });
   }
   uploadCover(req,res,function(err) {
@@ -118,20 +111,20 @@ app.delete('/delete/:trackName',function(req,res){
   nameFile = name.slice(0, -4)+'.png';
 
 
-    fs.unlink('/mnt/nas/'+ name,function (err){
-      if (err) throw err;
+  fs.unlink('/mnt/nas/'+ name,function (err){
+    if (err) throw err;
 
-      if(!fs.existsSync('/mnt/nas/covers/'+ nameFile)) {
-        console.log("Cover not found");
-        res.end("Track is deleted but no cover, it is ok.");
-      }else{
-        fs.unlink('/mnt/nas/covers/'+ nameFile,function (err){
-          if (err) throw err;
-          console.log('successfully deleted track and cover');
-          res.end("Track and cover is deleted");
-        });
-      }
-    });
+    if(!fs.existsSync('/mnt/nas/covers/'+ nameFile)) {
+      console.log("Cover not found");
+      res.end("Track is deleted but no cover, it is ok.");
+    }else{
+      fs.unlink('/mnt/nas/covers/'+ nameFile,function (err){
+        if (err) throw err;
+        console.log('successfully deleted track and cover');
+        res.end("Track and cover is deleted");
+      });
+    }
+  });
   
 });
 
