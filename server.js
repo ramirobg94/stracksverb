@@ -115,6 +115,7 @@ app.delete('/delete/:trackName',function(req,res){
 	console.log("quiere que borre");
 	console.log(req.params.trackName);
   name = req.params.trackName;
+  nameFile = name.slice(0, -4)+'.png';
 
   fs.unlink('/mnt/nas/'+ name,function (err){
     if (err) throw err;
